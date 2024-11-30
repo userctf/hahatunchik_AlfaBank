@@ -1,6 +1,13 @@
 package Alpha_Beta_Gamma_Shtrih.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import Alpha_Beta_Gamma_Shtrih.Model.CheckSignIn;
+import Alpha_Beta_Gamma_Shtrih.Model.CheckSignOut;
+import Alpha_Beta_Gamma_Shtrih.Model.Profile;
+import Alpha_Beta_Gamma_Shtrih.Model.SignMethodIn;
+import Alpha_Beta_Gamma_Shtrih.Model.SignMethodOut;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,16 +19,14 @@ public class Controller {
     private int recomended_subscription;
     int[] arr_of_available_options;
     
-    public int[] get_recomended_subscription(String doc_type, int client, 
-            int organization, String segment, String role, 
-            int organizations, String currentMethod, boolean mobileApp,
-            int[][] signatures, String[] availableMethods, int claims)
+    @GetMapping("/get_sign_method")
+    public int[] get_sign_method(@RequestParam SignMethodIn SignMethodIn)
     {
         //starting ML
         
         this.available_options.remove(Integer.valueOf(this.recomended_subscription));
         this.available_options.set(0,this.recomended_subscription);
-        if (doc_type != "special")
+        if (SignMethodIn.getAge() != "special")
         {
             this.available_options.remove(Integer.valueOf(2));
             this.available_options.remove(Integer.valueOf(3));
@@ -34,11 +39,12 @@ public class Controller {
         return arr_of_available_options;
     }
     
-    public int select_medod(String metod)
+    @GetMapping("/get_sign_method")
+    public CheckSignOut check_sign(@RequestParam CheckSignIn CheckSignIn)
     {
-        int token = 1;
-        
-        return token;
+        return new CheckSignOut("OK");
     }
+    
+    
     
 }

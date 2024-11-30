@@ -3,6 +3,8 @@ package Alpha_Beta_Gamma_Shtrih.TestController;
 import org.springframework.web.bind.annotation.RestController;
 import Alpha_Beta_Gamma_Shtrih.Model.Profile;
 import Alpha_Beta_Gamma_Shtrih.Model.User;
+import Alpha_Beta_Gamma_Shtrih.Model.SignMethodIn;
+import Alpha_Beta_Gamma_Shtrih.Model.SignMethodOut;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,18 +26,24 @@ public class TestController {
     }
     
     @GetMapping("/user")
-    public User getUser(@RequestParam String name) {
-        return new User(name, 15);
+    public List<User> getUser(@RequestParam String name) {
+        return List.of(new User(name, 15),
+                new User(name, 2),
+                new User(name, 134));
     }
     
     @GetMapping("/person")
-    public Profile get_profiles()
+    public List<Profile> get_profiles()
     {
         System.out.print("In ProfileController!");
         Profile Profile0 = new Profile();
         this.set_profile(Profile0);
+        Profile Profile1 = new Profile();
+        this.set_profile(Profile1);
+        Profile Profile2 = new Profile();
+        this.set_profile(Profile2);
         
-        return Profile0;
+        return List.of(Profile0,Profile1,Profile2);
                 
        
     }

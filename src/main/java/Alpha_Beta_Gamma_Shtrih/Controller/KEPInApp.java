@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Alpha_Beta_Gamma_Shtrih.Controller;
 
-/**
- *
- * @author GF
- */
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@RestController //return with json format
 public class KEPInApp {
-    
+    @GetMapping("/get_KEPInApp")
+    public void get_Subscription(String token)
+    {    }
 }
