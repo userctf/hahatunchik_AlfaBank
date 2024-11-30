@@ -2,13 +2,13 @@
 import Button from 'primevue/button'
 import { sendPostRequest, sendGetRequest } from './Base.ts'
 
-// let profiles:string[] = await sendGetRequest("get_profiles", {})
+// let profiles:any[] = await sendGetRequest("get_profiles", {})
 
-const profiles: string[] = ['Настя', 'Олег', 'Джон']
+let profiles = ['A', 'B', 'C']
 </script>
 
 <template>
-  <div>
+  <div class="div">
     <h1>Для тестирования выберите доступного пользователя или создайте нового</h1>
     <Button class="btn" v-for="p in profiles" :label="p" @click="$emit('select-profile', p)" />
 
@@ -25,7 +25,7 @@ const profiles: string[] = ['Настя', 'Олег', 'Джон']
 h1 {
   margin-bottom: 50px;
 }
-div {
+.div {
   display: flex;
   flex-direction: column;
   align-items: center;

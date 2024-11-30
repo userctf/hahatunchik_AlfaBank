@@ -7,8 +7,10 @@ const document_types: string[] = ['Обычный', 'Специальный']
 </script>
 
 <template>
-  <div>
-    <h1>Выберите тип документа для подписи. Профиль: {{ profile }}</h1>
+  <div class="div">
+    <h1>
+      Выберите тип документа для подписи. Профиль: <span>{{ profile.clientId }}</span>
+    </h1>
     <Button
       class="btn"
       v-for="dt in document_types"
@@ -29,7 +31,14 @@ const document_types: string[] = ['Обычный', 'Специальный']
 h1 {
   margin-bottom: 50px;
 }
-div {
+
+h1 span {
+  color: var(--main-white);
+  background-color: var(--main-red);
+  padding: 2px;
+}
+
+.div {
   display: flex;
   flex-direction: column;
   align-items: center;

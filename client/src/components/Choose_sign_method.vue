@@ -12,7 +12,7 @@ const { sign_methods, profile, document_type } = defineProps([
   <div class="div">
     <h1>
       Выберите способ подписи. Мы советуем первый способ. Тип документа:
-      <span>{{ document_type }}</span> Профиль: <span>{{ profile }}</span>
+      <span>{{ document_type }}</span> Профиль: <span>{{ profile.clientId }}</span>
     </h1>
     <Button
       class="btn"
@@ -34,6 +34,13 @@ const { sign_methods, profile, document_type } = defineProps([
 h1 {
   margin-bottom: 50px;
 }
+
+h1 span {
+  color: var(--main-white);
+  background-color: var(--main-red);
+  padding: 2px;
+}
+
 .div {
   display: flex;
   flex-direction: column;

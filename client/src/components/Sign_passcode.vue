@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import Button from 'primevue/button'
-import InputOtp from 'primevue/inputotp'
+import InputText from 'primevue/inputtext'
+
 import { ref } from 'vue'
 
 const { profile, document_type } = defineProps(['profile', 'document_type'])
 
-const sms_code = ref('')
+const passcode = ref('')
 </script>
 
 <template>
   <div id="div">
     <h1>
-      Введите код из смс. Тип документа: <span>{{ document_type }}</span> Профиль:
+      Введите пин код вашего ключа доступа. Тип документа: <span>{{ document_type }}</span> Профиль:
       <span>{{ profile.clientId }}</span>
     </h1>
 
-    <InputOtp class="sms_code" v-model="sms_code" />
-    <Button class="btn" label="Подписать" @click="$emit('check-sign', sms_code)" />
+    <InputText type="text" class="sms_code" v-model="passcode" />
+    <Button class="btn" label="Подписать" @click="$emit('check-sign', passcode)" />
 
     <Button class="btn" severity="contrast" label="Назад" @click="$emit('step-back', 'sign')" />
   </div>

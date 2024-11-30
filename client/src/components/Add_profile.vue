@@ -1,98 +1,165 @@
 <script setup lang="ts">
+import { sendPostRequest } from './Base.ts'
 import { ref } from 'vue'
-import InputText from 'primevue/inputtext'
+import InputNumber from 'primevue/inputnumber'
+import Button from 'primevue/button'
 import FloatLabel from 'primevue/floatlabel'
 
 import Checkbox from 'primevue/checkbox'
 import Select from 'primevue/select'
 
-// let profiles:string[] = await sendGetRequest("get_profiles", {})
+import SelectButton from 'primevue/selectbutton'
 
-const segments = ['Малый бизнес', 'Средний бизнес', 'Крупный бизнес']
+const segments = ref(['Малый бизнес', 'Средний бизнес', 'Крупный бизнес'])
+const roles = ref(['ЕИО', 'Сотрудник'])
+const methods = ref(['SMS', 'PayControl', 'КЭП на токене', 'КЭП в приложении'])
 
 const params: Record<string, any> = ref({
-  clientId: 'client', // ИД пользователя
-  organizationId: 'organization', // ИД организациии
-  segment: 'value', // Сегмент организации: "Малый бизнес", "Средний бизнес", "Крупный бизнес"
-  role: 'value', // Роль уполномоченного лица: "ЕИО", "Сотрудник"
-  organizations: 3, // Общее количество организаций у уполномоченного лица: 1..300
-  currentMethod: 'method', // Действующий способ подписания."SMS", "PayControl", "КЭП на токене", "КЭП в приложении"
-  mobileApp: true, // Наличие мобильного приложения
-  signatures: {
-    // Подписанные ранее типы документов
-    common: {
-      mobile: 3, // Количество подписанных базовых документов в мобайле
-      web: 10, // Количество подписанных базовых документов в вебе
-    },
-    special: {
-      mobile: 5, // Количество подписанных документов особой важности в мобайле
-      web: 6, // Количество подписанных документов особой важности в вебе
-    },
+  clientId: undefined, // ИД пользователя
+  organizationId: undefined, // ИД организациии
+  segment: '', // Сегмент организации: "Малый бизнес", "Средний бизнес", "Крупный бизнес"
+  role: '', // Роль уполномоченного лица: "ЕИО", "Сотрудник"
+  organizations: undefined, // Общее количество организаций у уполномоченного лица: 1..300
+  currentMethod: '', // Действующий способ подписания."SMS", "PayControl", "КЭП на токене", "КЭП в приложении"
+  mobileApp: undefined, // Наличие мобильного приложения
+  // Подписанные ранее типы документов
+  common: {
+    mobile: undefined, // Количество подписанных базовых документов в мобайле
+    web: undefined, // Количество подписанных базовых документов в вебе
   },
-  availableMethods: ['method1', 'method2'], // Уже подключенные способы подписания."SMS", "PayControl", "КЭП на токене", "КЭП в приложении"
-  claims: 0, // Наличие обращений в банк по причине проблем с использованием СМС
+  special: {
+    mobile: undefined, // Количество подписанных документов особой важности в мобайле
+    web: undefined, // Количество подписанных документов особой важности в вебе
+  },
+  availableMethods: [], // Уже подключенные способы подписания."SMS", "PayControl", "КЭП на токене", "КЭП в приложении"
+  claims: undefined, // Наличие обращений в банк по причине проблем с использованием СМС
 })
+
+function add_user() {
+  alert('Пока что функционал добавления пользователя доступен только на сервере')
+}
 </script>
 
 <template>
   <div>
     <h1>Задайте имя и параметры нового пользователя</h1>
-    <FloatLabel variant="on">
-      <InputText id="on_label" v-model="params.clientId" />
+    <FloatLabel class="fl" variant="on">
+      <InputNumber v-model="params.clientId" inputId="withoutgrouping" :useGrouping="false" fluid />
       <label for="on_label">clientId</label>
     </FloatLabel>
 
-    <FloatLabel variant="on">
-      <InputText id="on_label" v-model="params.organizationId" />
+    <FloatLabel class="fl" variant="on">
+      <InputNumber
+        v-model="params.organizationId"
+        inputId="withoutgrouping"
+        :useGrouping="false"
+        fluid
+      />
       <label for="on_label">organizationId</label>
     </FloatLabel>
 
-    <FloatLabel variant="on">
-      <InputText id="on_label" v-model="params.segment" />
-      <label for="on_label">segment</label>
-    </FloatLabel>
+    <Select class="fl" v-model="params.segment" :options="segments" placeholder="segment" fluid />
 
-    <div>
-      <Select
-        v-model="params.segment"
-        :options="segments"
-        optionLabel="name"
-        placeholder="segment"
+    <Select class="fl" v-model="params.role" :options="roles" placeholder="role" fluid />
+
+    <FloatLabel class="fl" variant="on">
+      <InputNumber
+        v-model="params.organizations"
+        inputId="withoutgrouping"
+        :useGrouping="false"
+        fluid
       />
-    </div>
-
-    <FloatLabel variant="on">
-      <InputText id="on_label" v-model="params.role" />
-      <label for="on_label">role</label>
-    </FloatLabel>
-
-    <FloatLabel variant="on">
-      <InputText id="on_label" v-model="params.organizations" />
       <label for="on_label">organizations</label>
     </FloatLabel>
 
-    <FloatLabel variant="on">
-      <InputText id="on_label" v-model="params.currentMethod" />
-      <label for="on_label">currentMethod</label>
-    </FloatLabel>
+    <Select
+      class="fl"
+      v-model="params.currentMethod"
+      :options="methods"
+      placeholder="currentMethod"
+      fluid
+    />
 
-    <div>
-      <Checkbox v-model="params.mobileApp" inputId="mobileApp" />
+    <div class="fl">
+      <Checkbox v-model="params.mobileApp" inputId="mobileApp" binary />
       <label for="mobileApp">using mobileApp</label>
     </div>
 
-    <FloatLabel variant="on">
-      <InputText id="on_label" v-model="params.mobileApp" />
-      <label for="on_label">mobileApp</label>
+    <FloatLabel class="fl" variant="on">
+      <InputNumber
+        v-model="params.common.mobile"
+        inputId="withoutgrouping"
+        :useGrouping="false"
+        fluid
+      />
+      <label for="on_label">common.mobile</label>
+    </FloatLabel>
+
+    <FloatLabel class="fl" variant="on">
+      <InputNumber
+        v-model="params.common.web"
+        inputId="withoutgrouping"
+        :useGrouping="false"
+        fluid
+      />
+      <label for="on_label">common.web</label>
+    </FloatLabel>
+
+    <FloatLabel class="fl" variant="on">
+      <InputNumber
+        v-model="params.special.mobile"
+        inputId="withoutgrouping"
+        :useGrouping="false"
+        fluid
+      />
+      <label for="on_label">special.mobile</label>
+    </FloatLabel>
+
+    <FloatLabel class="fl" variant="on">
+      <InputNumber
+        v-model="params.special.web"
+        inputId="withoutgrouping"
+        :useGrouping="false"
+        fluid
+      />
+      <label for="on_label">special.web</label>
+    </FloatLabel>
+
+    <SelectButton
+      v-model="params.availableMethods"
+      :options="methods"
+      multiple
+      aria-labelledby="multiple"
+    />
+
+    <FloatLabel class="fl" variant="on">
+      <InputNumber v-model="params.claims" inputId="withoutgrouping" :useGrouping="false" fluid />
+      <label for="on_label">claims</label>
     </FloatLabel>
 
     <Button
       class="btn"
       severity="contrast"
-      label="Назад"
-      @click="$emit('step-back', 'document_type')"
+      label="Далее"
+      @click="$emit('select-profile', params)"
     />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.fl {
+  margin: 20px 0;
+}
+
+.btn {
+  display: block;
+  font-size: 2em;
+  margin: 20px 0;
+  width: 40%;
+  padding: 15px 20px;
+}
+
+.btn:last-child {
+  margin-top: 30px;
+}
+</style>

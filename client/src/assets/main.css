@@ -36,4 +36,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: scroll;
+}
+#root {
+  max-height: 100%;
 }
