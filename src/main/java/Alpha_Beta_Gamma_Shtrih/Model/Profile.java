@@ -3,7 +3,7 @@ package Alpha_Beta_Gamma_Shtrih.Model;
 import java.util.List;
 
 public class Profile {
-    private String name;
+    private String doc_type;
     
     private int clientId;
     private int organizationId;
@@ -22,7 +22,7 @@ public class Profile {
     public Profile(String name, int client, int organization, String segment, String role, int organizations, String currentMethod, boolean mobileApp,
             int[][] signatures, String[] availableMethods, int claims)
     {
-        this.name = name;
+        this.doc_type = name;
         
         this.clientId = client;
         this.organizationId = organization;
