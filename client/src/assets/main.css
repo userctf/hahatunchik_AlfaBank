@@ -1,0 +1,39 @@
+:root {
+  --main-red: #ed3024;
+  --main-black: #13141b;
+  --main-white: #f5f5f5;
+}
+
+body {
+  height: 100vh;
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--main-black);
+}
+
+header {
+  height: 10%;
+  background-color: var(--main-red);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: var(--main-white);
+}
+header h1 span {
+  margin-left: 10px;
+  letter-spacing: 0.099em;
+  color: var(--main-black);
+}
+
+main {
+  height: 90%;
+  background-color: var(--main-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
