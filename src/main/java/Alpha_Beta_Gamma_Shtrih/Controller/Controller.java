@@ -16,7 +16,7 @@ public class Controller {
     public Controller(){}
     
     private List<Integer> available_options = List.of(0,1,2,3);
-    private int recomended_subscription;
+    private int recomended_subscription=1;
     int[] arr_of_available_options;
     
     @GetMapping("/get_sign_method")
@@ -24,6 +24,7 @@ public class Controller {
     {
         //starting ML
         
+        System.out.print("starting ML");
         this.available_options.remove(Integer.valueOf(this.recomended_subscription));
         this.available_options.set(0,this.recomended_subscription);
         if (SignMethodIn.getAge() != "special")
@@ -39,9 +40,10 @@ public class Controller {
         return arr_of_available_options;
     }
     
-    @GetMapping("/get_sign_method")
+    @GetMapping("/check_sign")
     public CheckSignOut check_sign(@RequestParam CheckSignIn CheckSignIn)
     {
+        System.out.print("OK");
         return new CheckSignOut("OK");
     }
     

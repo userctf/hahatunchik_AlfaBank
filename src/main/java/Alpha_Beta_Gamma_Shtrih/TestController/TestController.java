@@ -3,8 +3,6 @@ package Alpha_Beta_Gamma_Shtrih.TestController;
 import org.springframework.web.bind.annotation.RestController;
 import Alpha_Beta_Gamma_Shtrih.Model.Profile;
 import Alpha_Beta_Gamma_Shtrih.Model.User;
-import Alpha_Beta_Gamma_Shtrih.Model.SignMethodIn;
-import Alpha_Beta_Gamma_Shtrih.Model.SignMethodOut;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
