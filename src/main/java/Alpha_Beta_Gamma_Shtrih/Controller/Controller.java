@@ -30,8 +30,8 @@ public class Controller {
     private List<Integer> available_options = List.of(0,1,2,3);
     private int recomended_subscription;
     int[] arr_of_available_options;
-    
-    @GetMapping("/get_sign_method")
+
+    @PostMapping("/get_sign_method")
     public int[] get_sign_method(@RequestBody SignMethodIn SignMethodIn)
     {
         //starting ML

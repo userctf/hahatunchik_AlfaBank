@@ -1,7 +1,7 @@
 package Alpha_Beta_Gamma_Shtrih.Model;
 
 public class Profile {
-    private String docType; // Изменил название для соблюдения стандартов Java
+    //private String docType; // Изменил название для соблюдения стандартов Java
     private int clientId;
     private int organizationId;
     private String segment;
@@ -9,7 +9,6 @@ public class Profile {
     private int organizations;
     private String currentMethod;
     private boolean mobileApp;
-    private int[][] signatures;
     private int[] common;
     private int[] special;
     private String[] availableMethods;
@@ -17,30 +16,21 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(String docType, int clientId, int organizationId, String segment, String role, int organizations, String currentMethod, boolean mobileApp,
-                   int[][] signatures, String[] availableMethods, int claims) {
-        this.docType = docType;
+    public Profile(int clientId, int organizationId, String segment, String role, int organizations, String currentMethod, boolean mobileApp,
+                    int[] common, int[] special, String[] availableMethods, int claims) {
         this.clientId = clientId;
         this.organizationId = organizationId; // Исправили здесь
         this.segment = segment;
         this.role = role;
         this.organizations = organizations;
         this.mobileApp = mobileApp;
-        this.signatures = signatures;
-        this.common = this.signatures[0]; // Убедитесь, что signatures не пустой
-        this.special = this.signatures[1]; // Убедитесь, что signatures не пустой
+        this.common = common; // Убедитесь, что signatures не пустой
+        this.special = special; // Убедитесь, что signatures не пустой
         this.availableMethods = availableMethods;
         this.claims = claims;
     }
 
     // Геттеры и сеттеры
-    public String getDocType() {
-        return docType;
-    }
-
-    public void setDocType(String docType) {
-        this.docType = docType;
-    }
 
     public int getClientId() {
         return clientId;
@@ -98,15 +88,12 @@ public class Profile {
         this.mobileApp = mobileApp;
     }
 
-    public int[][] getSignatures() {
-        return signatures;
+    public void setCommon(int[] common) {
+        this.common = common;
     }
 
-    public void setSignatures(int[][] signatures) {
-
-        this.signatures = signatures;
-        this.common = signatures.length > 0 ? signatures[0] : null;  // Защита от пустого массива
-        this.special = signatures.length > 1 ? signatures[1] : null; // Защита от пустого массива
+    public void setSpecial(int[] special) {
+        this.special = special;
     }
 
     public int[] getCommon() {

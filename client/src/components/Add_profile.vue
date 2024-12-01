@@ -23,14 +23,8 @@ const params: Record<string, any> = ref({
   currentMethod: '', // Действующий способ подписания."SMS", "PayControl", "КЭП на токене", "КЭП в приложении"
   mobileApp: undefined, // Наличие мобильного приложения
   // Подписанные ранее типы документов
-  common: {
-    mobile: undefined, // Количество подписанных базовых документов в мобайле
-    web: undefined, // Количество подписанных базовых документов в вебе
-  },
-  special: {
-    mobile: undefined, // Количество подписанных документов особой важности в мобайле
-    web: undefined, // Количество подписанных документов особой важности в вебе
-  },
+  common: [0, 0],
+  special: [0, 0],
   availableMethods: [], // Уже подключенные способы подписания."SMS", "PayControl", "КЭП на токене", "КЭП в приложении"
   claims: undefined, // Наличие обращений в банк по причине проблем с использованием СМС
 })
@@ -87,7 +81,7 @@ function add_user() {
 
     <FloatLabel class="fl" variant="on">
       <InputNumber
-        v-model="params.common.mobile"
+        v-model="params.common[0]"
         inputId="withoutgrouping"
         :useGrouping="false"
         fluid
@@ -97,7 +91,7 @@ function add_user() {
 
     <FloatLabel class="fl" variant="on">
       <InputNumber
-        v-model="params.common.web"
+        v-model="params.common[1]"
         inputId="withoutgrouping"
         :useGrouping="false"
         fluid
@@ -107,7 +101,7 @@ function add_user() {
 
     <FloatLabel class="fl" variant="on">
       <InputNumber
-        v-model="params.special.mobile"
+        v-model="params.special[0]"
         inputId="withoutgrouping"
         :useGrouping="false"
         fluid
@@ -117,7 +111,7 @@ function add_user() {
 
     <FloatLabel class="fl" variant="on">
       <InputNumber
-        v-model="params.special.web"
+        v-model="params.special[1]"
         inputId="withoutgrouping"
         :useGrouping="false"
         fluid
