@@ -1,5 +1,5 @@
 export async function sendPostRequest(path: string, data: any): Promise<any> {
-  const url = `http://example.com/${path}`
+  const url = `http://localhost:8080/${path}`
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -20,7 +20,7 @@ export async function sendPostRequest(path: string, data: any): Promise<any> {
 }
 
 export async function sendGetRequest(path: string, params: Record<string, any>): Promise<any> {
-  const url = `https://example.com/${path}`
+  const url = `http://localhost:8080/${path}`
   const queryString = new URLSearchParams(params).toString()
   const fullUrl = `${url}?${queryString}`
 

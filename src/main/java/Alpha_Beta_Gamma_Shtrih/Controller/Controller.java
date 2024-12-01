@@ -32,7 +32,7 @@ public class Controller {
     int[] arr_of_available_options;
     
     @GetMapping("/get_sign_method")
-    public int[] get_sign_method(@RequestParam SignMethodIn SignMethodIn)
+    public int[] get_sign_method(@RequestBody SignMethodIn SignMethodIn)
     {
         //starting ML
         String url = "http://localhost:5000/predict";
