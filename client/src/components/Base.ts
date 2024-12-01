@@ -1,5 +1,5 @@
 export async function sendPostRequest(path: string, data: any): Promise<any> {
-  const url = `https://example.com/${path}`
+  const url = `http://example.com/${path}`
   try {
     const response = await fetch(url, {
       method: 'POST',

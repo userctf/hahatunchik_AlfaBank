@@ -8,5 +8,5 @@ public class AppController {
     AppController(){}
     @GetMapping("/get_AppController")
     public void get_Subscription()
-    {    }
+    {System.out.print("Done!");}
 }
